@@ -12,9 +12,33 @@ myanalyzer = Color_analyzer()   #Initialization data
 ```
 ```
 feature_extractor(pic_dir, pic_format='tif', zoom_in_size=4 , save_npy=False)
-# Arguments
-    x: Numpy 3D array of probability scores, (N, AUGMENTATIONS_PER_IMAGE, NUM_CLASSES)
-    mode: type of averaging, can be "arithmetic" or "geometric"
-# Returns
-    Mean probabilities 2D array (N, NUM_CLASSES)
+'''
+To extract features
+:param pic_dir: Folder location where images are stored
+:param pic_format: jpg, png, tif, etc.
+:param zoom_in_size:  In order to reduce the running time, you need to compress the picture.
+:param save_npy: if True, save the feature array as ./output/main_color_array.npy
+:return: a array of feature
+'''
+```
+
+```
+myanalyzer.plot_3d(feature)
+'''
+Draw a three-dimensional map
+:param feature: the feature array
+:param elev: the angle of the picture
+:param azim: the angle of the picture
+:return: None
+'''
+```
+
+```
+plot_hist(feature, savefig)
+'''
+plot histogram to description the means and variance of the h,s,v
+:param feature: the feature array
+:param savefig: if True, save the histogram pictures.
+:return: None
+'''
 ```
