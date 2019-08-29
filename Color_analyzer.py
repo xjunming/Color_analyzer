@@ -9,7 +9,6 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 from mpl_toolkits.mplot3d import Axes3D
-from sklearn.cluster import KMeans
 
 class Color_analyzer:
     """A simple color analysis tool"""
@@ -20,6 +19,12 @@ class Color_analyzer:
         pass
 
     def read_file(self, pic_dir, pic_format='tif'):
+        '''
+        Read files
+        :param pic_dir:  The folder where the image is located
+        :param pic_format:  Image format
+        :return:  List of picture names
+        '''
         file_list = []
         for root, dirs, files in os.walk(pic_dir):
             for file in files:
@@ -28,6 +33,13 @@ class Color_analyzer:
         return file_list
 
     def hsv2rgb(self, h, s, v):
+        '''
+        Convert hsv to rgb
+        :param h: Hue
+        :param s: Saturation
+        :param v:  Value
+        :return: R,G,B
+        '''
         h = float(h)
         s = float(s)
         v = float(v)
@@ -55,6 +67,11 @@ class Color_analyzer:
         return r, g, b
 
     def calculate_means_std(self, img):
+        '''
+        Calculate the mean and variance of the h,s,v channel
+        :param img: hsv array
+        :return: The mean and variance of the h,s,v channel
+        '''
         h, s, v = [], [], []
         for raw in range(img.shape[0]):
             for col in range(img.shape[1]):
@@ -83,6 +100,14 @@ class Color_analyzer:
         return self.calculate_means_std(hsv)
 
     def feature_extractor(self, pic_dir, pic_format='tif', zoom_in_size=4 , save_npy=False):
+        '''
+        To extract features
+        :param pic_dir: Folder location where images are stored
+        :param pic_format: jpg, png, tif, etc.
+        :param zoom_in_size:  In order to reduce the running time, you need to compress the picture.
+        :param save_npy: if True, save the feature array as ./output/main_color_array.npy
+        :return: a array of feature
+        '''
         files = self.read_file(pic_dir, pic_format)
         print('There are %s picture(s).'%len(files))
 
@@ -96,6 +121,12 @@ class Color_analyzer:
         return arr
 
     def plot_hist(self, feature, savefig=False):
+        '''
+        plot histogram to description the means and variance of the h,s,v
+        :param feature: the feature array
+        :param savefig: if True, save the histogram pictures.
+        :return: None
+        '''
         for i in range(6):
             data = np.array(feature[:, i], dtype=int)
             plt.hist(data, facecolor="blue", edgecolor="black", alpha=0.7)
@@ -148,6 +179,16 @@ class Color_analyzer:
         ax.set_ylim(0, 255)
         ax.set_zlim(0, 255)
         plt.show()
+
+class Clustering:
+    def __init__(self):
+        pass
+    def kmeans(self, feature, n_clusters):
+        estimator = KMeans(n_clusters=n_clusters)
+        estimator.fit(feature)
+        label_pred = estimator.labels_
+        centroids = estimator.cluster_centers_
+        return label_pred
 
 
 if __name__=='__main__':
