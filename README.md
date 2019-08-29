@@ -37,7 +37,7 @@ myanalyzer.plot_3d(feature)
 
 plot histogram to description the means and variance of the h,s,v
 ```
-plot_hist(feature, savefig)
+myanalyzer.plot_hist(feature, savefig)
 '''
 :param feature: the feature array
 :param savefig: if True, save the histogram pictures.
