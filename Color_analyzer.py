@@ -149,16 +149,6 @@ class Color_analyzer:
         ax.set_zlim(0, 255)
         plt.show()
 
-class Clustering:
-    def __init__(self):
-        pass
-    def kmeans(self, feature, n_clusters):
-        estimator = KMeans(n_clusters=n_clusters)
-        estimator.fit(feature)
-        label_pred = estimator.labels_
-        centroids = estimator.cluster_centers_
-        return label_pred
-
 
 if __name__=='__main__':
     pic_dir = 'E://data//'
