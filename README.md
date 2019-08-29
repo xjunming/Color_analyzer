@@ -6,14 +6,16 @@ When we do image processing, we often need to analyze the color distribution of 
 ## how to use
 I wrote a demo here. see `demo.ipynb`
 
+import Color_analyzer and Initialize it
 ```
 from Color_analyzer import Color_analyzer  #get the class
-myanalyzer = Color_analyzer()   #Initialization data
+myanalyzer = Color_analyzer()   #Initialization
 ```
+
+To extract features
 ```
 feature_extractor(pic_dir, pic_format='tif', zoom_in_size=4 , save_npy=False)
 '''
-To extract features
 :param pic_dir: Folder location where images are stored
 :param pic_format: jpg, png, tif, etc.
 :param zoom_in_size:  In order to reduce the running time, you need to compress the picture.
@@ -22,10 +24,10 @@ To extract features
 '''
 ```
 
+Draw a three-dimensional map
 ```
 myanalyzer.plot_3d(feature)
 '''
-Draw a three-dimensional map
 :param feature: the feature array
 :param elev: the angle of the picture
 :param azim: the angle of the picture
@@ -33,10 +35,10 @@ Draw a three-dimensional map
 '''
 ```
 
+plot histogram to description the means and variance of the h,s,v
 ```
 plot_hist(feature, savefig)
 '''
-plot histogram to description the means and variance of the h,s,v
 :param feature: the feature array
 :param savefig: if True, save the histogram pictures.
 :return: None
